@@ -5,9 +5,9 @@ import { Router } from "express-serve-static-core";
   This program and the accompanying materials are
   made available under the terms of the Eclipse Public License v2.0 which accompanies
   this distribution, and is available at https://www.eclipse.org/legal/epl-v20.html
-  
+
   SPDX-License-Identifier: EPL-2.0
-  
+
   Copyright Contributors to the Zowe Project.
 */
 
@@ -20,7 +20,7 @@ console.log("HELLO WORLD HERE!!!!!!!!!!");
 class HelloWorldDataservice{
   private context: any;
   private router: Router;
-  
+
   constructor(context: any,
     //@Inject(Angular2InjectionTokens.LOGGER) private log: ZLUX.ComponentLogger
     ){
@@ -41,12 +41,12 @@ class HelloWorldDataservice{
         "requestBody": req.body,
         "requestURL": req.originalUrl,
         "serverResponse": `Router received
-        
+
         '${safeMessage}'
-        
+
         from client`
       }
-      console.log("BIG BALLER HERE!!!!!!!!");        
+      console.log("BIG BALLER HERE!!!!!!!!");
       res.status(200).json(responseBody);
     });
     this.router = router;
@@ -59,6 +59,13 @@ class HelloWorldDataservice{
 
 
 exports.helloWorldRouter = function(context): Router {
+  var sampleLogger = context.logger;
+
+  if(sampleLogger){
+    sampleLogger.info("I am here")
+    sampleLogger.info("S0001")
+    sampleLogger.info("S0002")
+  }
   return new Promise(function(resolve, reject) {
     let dataservice = new HelloWorldDataservice(context);
     resolve(dataservice.getRouter());
@@ -70,9 +77,9 @@ exports.helloWorldRouter = function(context): Router {
   This program and the accompanying materials are
   made available under the terms of the Eclipse Public License v2.0 which accompanies
   this distribution, and is available at https://www.eclipse.org/legal/epl-v20.html
-  
+
   SPDX-License-Identifier: EPL-2.0
-  
+
   Copyright Contributors to the Zowe Project.
 */
 
